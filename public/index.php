@@ -4,20 +4,29 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $baseDir = dirname(__DIR__);
-$coreDir = file_exists($baseDir . '/core') ? 'core' : (file_exists($baseDir . '/Core') ? 'Core' : null);
+$coreDir = is_dir($baseDir . '/core') ? 'core' : (is_dir($baseDir . '/Core') ? 'Core' : null);
 
-if (!$coreDir || !file_exists($baseDir . "/$coreDir/Autoloader.php")) {
-    $found = array_filter(glob($baseDir . '/*'), 'is_dir');
-    $foundNames = array_map('basename', $found);
-    
-    die("Error: The 'core' directory is missing.<br>" .
-        "Expected: $baseDir/core/Autoloader.php<br>" .
-        "Directories found in root: " . implode(', ', $foundNames) . "<br><br>" .
-        "<b>Solution:</b> Ensure the 'core' folder is uploaded to the same directory as your 'public' folder.");
+if (!$coreDir) {
+    $foundNames = array_map('basename', array_filter(glob($baseDir . '/*'), 'is_dir'));
+    die("Error: 'core' directory not found. Found: " . implode(', ', $foundNames));
 }
 
-require_once $baseDir . "/$coreDir/Autoloader.php";
-require_once $baseDir . "/$coreDir/Helpers.php";
+// Case-insensitive file check
+$filesInCore = array_map('basename', glob($baseDir . "/$coreDir/*.php"));
+$findFile = function($name) use ($filesInCore) {
+    foreach ($filesInCore as $f) if (strtolower($f) == strtolower($name)) return $f;
+    return null;
+};
+
+$autoloader = $findFile('Autoloader.php');
+$helpers = $findFile('Helpers.php');
+
+if (!$autoloader || !$helpers) {
+    die("Error: Missing files in $coreDir/. Found: " . implode(', ', $filesInCore));
+}
+
+require_once $baseDir . "/$coreDir/$autoloader";
+require_once $baseDir . "/$coreDir/$helpers";
 
 // Load environment variables
 loadEnv(__DIR__ . '/../.env');
