@@ -3,14 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$baseDir = dirname(__DIR__);
-
-// Detect core directory casing
-$coreDir = is_dir($baseDir . '/core') ? 'core' : (is_dir($baseDir . '/Core') ? 'Core' : 'core');
-
-// Standard requires (Ensure these files are uploaded to the server!)
-require_once $baseDir . "/$coreDir/Autoloader.php";
-require_once $baseDir . "/$coreDir/Helpers.php";
+require_once __DIR__ . '/../core/Autoloader.php';
+require_once __DIR__ . '/../core/Helpers.php';
 
 // Load environment variables
 loadEnv(__DIR__ . '/../.env');
