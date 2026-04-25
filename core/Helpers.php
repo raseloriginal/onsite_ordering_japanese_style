@@ -35,9 +35,12 @@ function loadEnv($path) {
             continue;
         }
 
-        list($name, $value) = explode('=', $line, 2);
-        $name = trim($name);
-        $value = trim($value);
+        $parts = explode('=', $line, 2);
+        if (count($parts) !== 2) {
+            continue;
+        }
+        $name = trim($parts[0]);
+        $value = trim($parts[1]);
 
         if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
             putenv(sprintf('%s=%s', $name, $value));
