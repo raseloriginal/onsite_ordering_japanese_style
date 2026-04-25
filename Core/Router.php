@@ -17,8 +17,15 @@ class Router {
     public function dispatch($url, $method) {
         // Remove base path from URL if exists
         $config = require __DIR__ . '/../config/config.php';
-        $base_path = parse_url($config['base_url'], PHP_URL_PATH);
-        $url = str_replace($base_path, '', $url);
+        $base_url = rtrim($config['base_url'], '/');
+        $base_path = parse_url($base_url, PHP_URL_PATH);
+        
+        if ($base_path && $base_path !== '/') {
+            if (strpos($url, $base_path) === 0) {
+                $url = substr($url, strlen($base_path));
+            }
+        }
+        
         $url = trim($url, '/');
         if ($url === '') $url = '/';
         else $url = '/' . $url;

@@ -3,8 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__ . '/../core/Autoloader.php';
-require_once __DIR__ . '/../core/Helpers.php';
+require_once __DIR__ . '/../Core/Autoloader.php';
+require_once __DIR__ . '/../Core/Helpers.php';
 
 // Load environment variables
 loadEnv(__DIR__ . '/../.env');

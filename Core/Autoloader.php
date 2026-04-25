@@ -2,8 +2,8 @@
 
 spl_autoload_register(function ($class) {
     $prefixes = [
-        'App\\' => __DIR__ . '/../app/',
-        'Core\\' => __DIR__ . '/../core/'
+        'App\\' => __DIR__ . '/../App/',
+        'Core\\' => __DIR__ . '/../Core/'
     ];
 
     foreach ($prefixes as $prefix => $base_dir) {
