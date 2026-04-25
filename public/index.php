@@ -4,13 +4,20 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $baseDir = dirname(__DIR__);
+$coreDir = file_exists($baseDir . '/core') ? 'core' : (file_exists($baseDir . '/Core') ? 'Core' : null);
 
-if (!file_exists($baseDir . '/core/Autoloader.php')) {
-    die("Error: The 'core' directory or 'Autoloader.php' is missing from the server. <br> Expected path: " . $baseDir . '/core/Autoloader.php' . "<br><br>Please ensure you have uploaded the entire project, not just the 'public' folder.");
+if (!$coreDir || !file_exists($baseDir . "/$coreDir/Autoloader.php")) {
+    $found = array_filter(glob($baseDir . '/*'), 'is_dir');
+    $foundNames = array_map('basename', $found);
+    
+    die("Error: The 'core' directory is missing.<br>" .
+        "Expected: $baseDir/core/Autoloader.php<br>" .
+        "Directories found in root: " . implode(', ', $foundNames) . "<br><br>" .
+        "<b>Solution:</b> Ensure the 'core' folder is uploaded to the same directory as your 'public' folder.");
 }
 
-require_once $baseDir . '/core/Autoloader.php';
-require_once $baseDir . '/core/Helpers.php';
+require_once $baseDir . "/$coreDir/Autoloader.php";
+require_once $baseDir . "/$coreDir/Helpers.php";
 
 // Load environment variables
 loadEnv(__DIR__ . '/../.env');
