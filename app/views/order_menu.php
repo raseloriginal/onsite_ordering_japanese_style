@@ -413,7 +413,7 @@
             };
 
             try {
-                const response = await fetch('/restuarent_ordersystem/public/api/order', {
+                const response = await fetch('<?= url('/api/order') ?>', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(orderData)

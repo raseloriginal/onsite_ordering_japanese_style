@@ -153,7 +153,7 @@ include 'admin_layout_header.php';
         const data = Object.fromEntries(formData.entries());
         
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/items/save', {
+            const response = await fetch('<?= url('/admin/items/save') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -172,7 +172,7 @@ include 'admin_layout_header.php';
         if (!confirm('Are you sure you want to delete this item?')) return;
         
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/items/delete', {
+            const response = await fetch('<?= url('/admin/items/delete') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: id })
@@ -233,7 +233,7 @@ include 'admin_layout_header.php';
         const data = Object.fromEntries(formData.entries());
         
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/items/save', {
+            const response = await fetch('<?= url('/admin/items/save') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -252,7 +252,7 @@ include 'admin_layout_header.php';
         if (!confirm('Are you sure you want to delete this item?')) return;
         
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/items/delete', {
+            const response = await fetch('<?= url('/admin/items/delete') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: id })

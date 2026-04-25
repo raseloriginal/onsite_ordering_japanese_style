@@ -192,7 +192,7 @@
 
         async function fetchData() {
             try {
-                const res = await $.get('/restuarent_ordersystem/public/api/waiter/data');
+                const res = await $.get('<?= url('/api/waiter/data') ?>');
                 renderData(res);
             } catch (err) { console.error('Failed to fetch data', err); }
         }
@@ -200,7 +200,7 @@
         async function approvePayment(orderId, btn) {
             $(btn).prop('disabled', true).text('PROCESSING...');
             try {
-                const res = await fetch('/restuarent_ordersystem/public/waiter/approve', {
+                const res = await fetch('<?= url('/waiter/approve') ?>', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ order_id: orderId })
@@ -212,7 +212,7 @@
 
         async function markRead(id) {
             try {
-                const res = await fetch('/restuarent_ordersystem/public/waiter/notif-read', {
+                const res = await fetch('<?= url('/waiter/notif-read') ?>', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: id })

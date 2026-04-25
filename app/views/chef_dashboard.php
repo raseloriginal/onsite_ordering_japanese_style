@@ -168,7 +168,7 @@
 
         async function fetchOrders() {
             try {
-                const res = await $.get('/restuarent_ordersystem/public/api/chef/data');
+                const res = await $.get('<?= url('/api/chef/data') ?>');
                 renderOrders(res.orders);
             } catch (err) { console.error('Failed to fetch orders', err); }
         }
@@ -176,7 +176,7 @@
         async function updateStatus(orderId, status, btn) {
             $(btn).prop('disabled', true).text('UPDATING...');
             try {
-                const res = await fetch('/restuarent_ordersystem/public/chef/update', {
+                const res = await fetch('<?= url('/chef/update') ?>', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ order_id: orderId, status: status })

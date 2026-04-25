@@ -1,6 +1,10 @@
 <?php
 
 require_once __DIR__ . '/../core/Autoloader.php';
+require_once __DIR__ . '/../core/Helpers.php';
+
+// Load environment variables
+loadEnv(__DIR__ . '/../.env');
 
 use Core\Router;
 

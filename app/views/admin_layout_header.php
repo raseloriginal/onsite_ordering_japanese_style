@@ -29,7 +29,7 @@
 <body class="flex flex-col md:flex-row min-h-screen">
     <?php 
     $current_url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $base_admin = '/restuarent_ordersystem/public/admin';
+    $base_admin = parse_url(url('/admin'), PHP_URL_PATH);
     ?>
     <!-- Desktop Sidebar -->
     <aside class="hidden md:flex w-72 bg-white border-r border-[#E5E1D8] flex-col p-8 shrink-0 min-h-screen sticky top-0">
@@ -57,7 +57,7 @@
         </nav>
         
         <div class="mt-auto pt-8 border-t border-[#E5E1D8]">
-            <a href="/restuarent_ordersystem/public/" class="text-xs uppercase tracking-widest text-gray-400 hover:text-[#BC002D] transition-colors">Store View →</a>
+            <a href="<?= url('/') ?>" class="text-xs uppercase tracking-widest text-gray-400 hover:text-[#BC002D] transition-colors">Store View →</a>
         </div>
     </aside>
 

@@ -22,7 +22,7 @@
 
         <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
             <?php foreach($tables as $table): ?>
-            <a href="/restuarent_ordersystem/public/table/<?= $table['id'] ?>" 
+            <a href="<?= url('/table/' . $table['id']) ?>" 
                class="table-card bg-white p-8 rounded-2xl shadow-sm text-center japanese-border group hover:border-red-300">
                 <div class="text-xs text-gray-400 mb-1">TABLE</div>
                 <div class="text-4xl font-bold text-[#2c3e50] group-hover:text-red-500 transition-colors"><?= $table['table_number'] ?></div>

@@ -122,7 +122,7 @@ include 'admin_layout_header.php';
     }
 
     async function showQRCode(id, tableNumber) {
-        const url = window.location.origin + '/restuarent_ordersystem/public/table/' + tableNumber;
+        const url = '<?= url('/table/') ?>' + tableNumber;
         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(url)}`;
         
         document.getElementById('qr-modal-title').innerText = `Table ${tableNumber} QR`;
@@ -162,7 +162,7 @@ include 'admin_layout_header.php';
         const data = Object.fromEntries(formData.entries());
         
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/tables/save', {
+            const response = await fetch('<?= url('/admin/tables/save') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -180,7 +180,7 @@ include 'admin_layout_header.php';
     async function deleteTable(id) {
         if (!confirm('Delete this table?')) return;
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/tables/delete', {
+            const response = await fetch('<?= url('/admin/tables/delete') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: id })

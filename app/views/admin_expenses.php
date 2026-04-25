@@ -104,7 +104,7 @@ include 'admin_layout_header.php';
         const data = Object.fromEntries(formData.entries());
         
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/expenses/save', {
+            const response = await fetch('<?= url('/admin/expenses/save') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -122,7 +122,7 @@ include 'admin_layout_header.php';
     async function deleteExpense(id) {
         if (!confirm('Delete this expense record?')) return;
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/expenses/delete', {
+            const response = await fetch('<?= url('/admin/expenses/delete') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: id })
@@ -169,7 +169,7 @@ include 'admin_layout_header.php';
         const data = Object.fromEntries(formData.entries());
         
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/expenses/save', {
+            const response = await fetch('<?= url('/admin/expenses/save') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -187,7 +187,7 @@ include 'admin_layout_header.php';
     async function deleteExpense(id) {
         if (!confirm('Delete this expense record?')) return;
         try {
-            const response = await fetch('/restuarent_ordersystem/public/admin/expenses/delete', {
+            const response = await fetch('<?= url('/admin/expenses/delete') ?>', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: id })
