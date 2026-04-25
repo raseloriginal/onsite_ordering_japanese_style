@@ -3,8 +3,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__ . '/../core/Autoloader.php';
-require_once __DIR__ . '/../core/Helpers.php';
+$baseDir = dirname(__DIR__);
+
+if (!file_exists($baseDir . '/core/Autoloader.php')) {
+    die("Error: The 'core' directory or 'Autoloader.php' is missing from the server. <br> Expected path: " . $baseDir . '/core/Autoloader.php' . "<br><br>Please ensure you have uploaded the entire project, not just the 'public' folder.");
+}
+
+require_once $baseDir . '/core/Autoloader.php';
+require_once $baseDir . '/core/Helpers.php';
 
 // Load environment variables
 loadEnv(__DIR__ . '/../.env');
