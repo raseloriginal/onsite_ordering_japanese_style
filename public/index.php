@@ -11,8 +11,8 @@ if (!$coreDir) {
     die("Error: 'core' directory not found. Found: " . implode(', ', $foundNames));
 }
 
-// Case-insensitive file check
-$filesInCore = array_map('basename', glob($baseDir . "/$coreDir/*.php"));
+// List all files in core for debugging
+$filesInCore = array_map('basename', glob($baseDir . "/$coreDir/*"));
 $findFile = function($name) use ($filesInCore) {
     foreach ($filesInCore as $f) if (strtolower($f) == strtolower($name)) return $f;
     return null;
