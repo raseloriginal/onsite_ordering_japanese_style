@@ -4,29 +4,13 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $baseDir = dirname(__DIR__);
-$coreDir = is_dir($baseDir . '/core') ? 'core' : (is_dir($baseDir . '/Core') ? 'Core' : null);
 
-if (!$coreDir) {
-    $foundNames = array_map('basename', array_filter(glob($baseDir . '/*'), 'is_dir'));
-    die("Error: 'core' directory not found. Found: " . implode(', ', $foundNames));
-}
+// Detect core directory casing
+$coreDir = is_dir($baseDir . '/core') ? 'core' : (is_dir($baseDir . '/Core') ? 'Core' : 'core');
 
-// List all files in core for debugging
-$filesInCore = array_map('basename', glob($baseDir . "/$coreDir/*"));
-$findFile = function($name) use ($filesInCore) {
-    foreach ($filesInCore as $f) if (strtolower($f) == strtolower($name)) return $f;
-    return null;
-};
-
-$autoloader = $findFile('Autoloader.php');
-$helpers = $findFile('Helpers.php');
-
-if (!$autoloader || !$helpers) {
-    die("Error: Missing files in $coreDir/. Found: " . implode(', ', $filesInCore));
-}
-
-require_once $baseDir . "/$coreDir/$autoloader";
-require_once $baseDir . "/$coreDir/$helpers";
+// Standard requires (Ensure these files are uploaded to the server!)
+require_once $baseDir . "/$coreDir/Autoloader.php";
+require_once $baseDir . "/$coreDir/Helpers.php";
 
 // Load environment variables
 loadEnv(__DIR__ . '/../.env');
